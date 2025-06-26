@@ -1,7 +1,8 @@
 vim.lsp.enable({
     "lua_ls",
     "pylsp",
-    "clangd"
+    "clangd",
+    "marksman"
 })
 
 vim.diagnostic.config({
