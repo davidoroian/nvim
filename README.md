@@ -1,6 +1,10 @@
-# Never again use VSCode NeoVim setup
+# Never use VSCode again NeoVim setup
 
 This is my NeoVim config
+
+## Installation
+
+Copy this repository in whatever method you want in your `~/.config/` directory 
 
 ## Requirements
 
