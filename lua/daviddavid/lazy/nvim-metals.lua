@@ -5,34 +5,7 @@ return {
       {
         "j-hui/fidget.nvim",
         opts = {},
-      },
-      {
-        "mfussenegger/nvim-dap",
-        config = function(self, opts)
-          -- Debug settings if you're using nvim-dap
-          local dap = require("dap")
-
-          dap.configurations.scala = {
-            {
-              type = "scala",
-              request = "launch",
-              name = "RunOrTest",
-              metals = {
-                runType = "runOrTestFile",
-                --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-              },
-            },
-            {
-              type = "scala",
-              request = "launch",
-              name = "Test Target",
-              metals = {
-                runType = "testTarget",
-              },
-            },
-          }
-        end
-      },
+      }
     },
     ft = { "scala", "sbt", "java" },
     opts = function()
@@ -56,82 +29,7 @@ return {
       metals_config.init_options.statusBarProvider = "off"
 
       -- Example if you are using cmp how to make sure the correct capabilities for snippets are set
-      metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
-
-      metals_config.on_attach = function(client, bufnr)
-        require("metals").setup_dap()
-
-        -- LSP vim.keymap.setpings
-        vim.keymap.set("n", "gD", vim.lsp.buf.definition)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references)
-        vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol)
-        vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol)
-        vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run)
-        vim.keymap.set("n", "<leader>sh", vim.lsp.buf.signature_help)
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-        vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
-
-        vim.keymap.set("n", "<leader>ws", function()
-          require("metals").hover_worksheet()
-        end)
-
-        -- all workspace diagnostics
-        vim.keymap.set("n", "<leader>aa", vim.diagnostic.setqflist)
-
-        -- all workspace errors
-        vim.keymap.set("n", "<leader>ae", function()
-          vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
-        end)
-
-        -- all workspace warnings
-        vim.keymap.set("n", "<leader>aw", function()
-          vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.WARN })
-        end)
-
-        -- buffer diagnostics only
-        vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist)
-
-        vim.keymap.set("n", "[c", function()
-          vim.diagnostic.jump({ count = 1, float=true })
-        end)
-
-        vim.keymap.set("n", "]c", function()
-          vim.diagnostic.jump({ count = -1, float=true })
-        end)
-
-        -- Example vim.keymap.setpings for usage with nvim-dap. If you don't use that, you can
-        -- skip these
-        vim.keymap.set("n", "<leader>dc", function()
-          require("dap").continue()
-        end)
-
-        vim.keymap.set("n", "<leader>dr", function()
-          require("dap").repl.toggle()
-        end)
-
-        vim.keymap.set("n", "<leader>dK", function()
-          require("dap.ui.widgets").hover()
-        end)
-
-        vim.keymap.set("n", "<leader>dt", function()
-          require("dap").toggle_breakpoint()
-        end)
-
-        vim.keymap.set("n", "<leader>dso", function()
-          require("dap").step_over()
-        end)
-
-        vim.keymap.set("n", "<leader>dsi", function()
-          require("dap").step_into()
-        end)
-
-        vim.keymap.set("n", "<leader>dl", function()
-          require("dap").run_last()
-        end)
-      end
+      metals_config.capabilities = require("mini.completion").get_lsp_capabilities()
 
       return metals_config
     end,
