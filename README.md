@@ -55,4 +55,4 @@ to install by modifying the `ensure_servers` table.
 have similar functionality with the code existing only in one place. Here the `setup_ui` function configs `vim.diagnostics` and makes sure the `on_attach`
 function is called for each LSP. 
 
-For `[Metals](https://scalameta.org/metals/)`(Scala LSP) the config is available in `lua/daviddavid/lazy/nvim-metals.lua`
+For [Metals](https://scalameta.org/metals/)(Scala LSP) the config is available in `lua/daviddavid/lazy/nvim-metals.lua`
