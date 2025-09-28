@@ -10,6 +10,10 @@ return {
     ft = { "scala", "sbt", "java" },
     opts = function()
       local metals_config = require("metals").bare_config()
+      local common = require("daviddavid.lsp.common")
+
+      common.setup_ui()
+      metals_config = common.apply_to_config(metals_config)
 
       -- Example of settings
       metals_config.settings = {

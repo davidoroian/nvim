@@ -2,6 +2,7 @@ local M = {}
 
 -- Ensure only apply UI once even if required multiple times
 local _ui_applied = false
+local _attach_autocmd_set = false
 
 function M.setup_ui()
   if _ui_applied then return end
@@ -24,6 +25,20 @@ function M.setup_ui()
       prefix = "",
     },
   })
+  -- Ensure our on_attach runs for every LSP client/buffer
+  if not _attach_autocmd_set then
+    _attach_autocmd_set = true
+    local group = vim.api.nvim_create_augroup("daviddavid_lsp_common_attach", { clear = true })
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = group,
+      callback = function(args)
+        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        -- Reuse the shared on_attach for all LSP clients (Mason, Metals, etc.)
+        require("daviddavid.lsp.common").on_attach(client, bufnr)
+      end,
+    })
+  end
 end
 
 function M.capabilities()
@@ -67,7 +82,6 @@ end
 function M.server_defaults()
   return {
     capabilities = M.capabilities(),
-    on_attach = M.on_attach,
   }
 end
 

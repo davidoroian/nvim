@@ -1,6 +1,5 @@
 return {
-    "remote-sshfs.nvim",
-    dir = vim.fn.expand("$HOME") .. "/repos/remote-sshfs.nvim",
+    "davidoroian/remote-sshfs.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config  = function()
         require('remote-sshfs').setup{
