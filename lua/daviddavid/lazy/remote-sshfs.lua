@@ -1,5 +1,5 @@
 return {
-    "nosduco/remote-sshfs.nvim",
+    "davidoroian/remote-sshfs.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config  = function()
         require('remote-sshfs').setup{
@@ -50,30 +50,9 @@ return {
             },
         }
         local api = require('remote-sshfs.api')
-        local function refresh_netrw()
-            local connections = require('remote-sshfs.connections')
-
-            if connections.is_connected() then
-                -- Force refresh netrw by reopening current directory
-                vim.cmd('edit .')
-                print("✓ Refreshed netrw for remote directory: " .. vim.fn.getcwd())
-            end
-        end
-
-        -- Enhanced connect function for netrw
-        local function connect_and_refresh_netrw()
-            api.connect()
-
-            -- Wait for connection, then refresh netrw
-            vim.defer_fn(function()
-                refresh_netrw()
-            end, 5000)
-        end
-
         -- Keymaps
-        vim.keymap.set('n', '<leader>rc', connect_and_refresh_netrw, { desc = "Connect and refresh netrw" })
+        vim.keymap.set('n', '<leader>rc', api.connect, {})
         vim.keymap.set('n', '<leader>rd', api.disconnect, {})
-        vim.keymap.set('n', '<leader>rr', refresh_netrw, { desc = "Refresh netrw" })
         vim.keymap.set('n', '<leader>re', api.edit, {})
     end,
 }

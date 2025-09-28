@@ -7,5 +7,7 @@ return {
         require('mini.comment').setup()
         require('mini.git').setup()
         require('mini.icons').setup()
+        require('mini.snippets').setup()
+        require('mini.completion').setup()
     end
 }
