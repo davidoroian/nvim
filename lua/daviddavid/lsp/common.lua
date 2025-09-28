@@ -66,16 +66,9 @@ function M.on_attach(client, bufnr)
     nmap("<leader>ws", tb.lsp_dynamic_workspace_symbols, "LSP: Workspace Symbols")
   end
 
-  local ok_conform, conform = pcall(require, "conform")
-  if ok_conform then
-    nmap("<leader>f", function()
-      conform.format({ async = true, lsp_fallback = true })
-    end, "Format buffer")
-  else
-    nmap("<leader>f", function()
-      vim.lsp.buf.format({ async = true })
-    end, "Format buffer")
-  end
+  nmap("<leader>f", function()
+    vim.lsp.buf.format({ async = true })
+  end, "Format buffer")
 end
 
 -- Returns fresh defaults table

@@ -4,6 +4,7 @@ local M = {}
 
 -- Add more servers as needed; mason-lspconfig will install them automatically.
 M.ensure_servers = {
+  -- LSPs
   "lua_ls",
   "bashls",
   "jsonls",
@@ -11,6 +12,8 @@ M.ensure_servers = {
   "pyright",
   "clangd",
   "marksman",
+  -- Formatters
+  "stylua",
 }
 
 function M.setup()
