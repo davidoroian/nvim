@@ -23,6 +23,7 @@ For understanding plugin configruration check out the files in the above mention
 #### Remote connection
 
 - `<leader>rc` - connect to remote directory (you might need to make sure you have a password prompter installed in order for this to work)
+- `<leader>rd` - disconnect from remote 
 - closing nvim `:q` also disconnects from the remote
 
 #### Other useful ones
