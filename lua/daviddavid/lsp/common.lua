@@ -43,6 +43,10 @@ end
 
 function M.capabilities()
   local caps = vim.lsp.protocol.make_client_capabilities()
+  local ok, mc = pcall(require, "mini.completion")
+  if ok and mc.get_lsp_capabilities then
+    caps = vim.tbl_deep_extend("force", caps, mc.get_lsp_capabilities())
+  end
   return caps
 end
 
